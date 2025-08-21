@@ -62,7 +62,7 @@ def predict_price():
         if not model_loaded or model is None or scaler is None:
             prediction = fallback_prediction(data)
             return jsonify({
-                "price": float(prediction),
+                "prediction": float(prediction),   # 🔥 changed from "price"
                 "status": "success",
                 "note": "Fallback prediction (model not loaded)"
             })
@@ -91,7 +91,7 @@ def predict_price():
         prediction = model.predict(features_scaled)[0]
 
         return jsonify({
-            "price": float(prediction),
+            "prediction": float(prediction),   # 🔥 changed from "price"
             "status": "success"
         })
 
@@ -100,7 +100,7 @@ def predict_price():
         try:
             prediction = fallback_prediction(data)
             return jsonify({
-                "price": float(prediction),
+                "prediction": float(prediction),   # 🔥 changed from "price"
                 "status": "success",
                 "note": f"Fallback used due to error: {str(e)}"
             })
