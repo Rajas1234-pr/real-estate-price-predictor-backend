@@ -117,6 +117,16 @@ def health_check():
         "model_loaded": model_loaded
     })
 
+# ✅ Added root route for Render health check
+@app.route("/", methods=["GET"])
+def home():
+    return jsonify({
+        "status": "ok",
+        "message": "Backend running!"
+    })
+
 if __name__ == "__main__":
-    print("🚀 Starting ML API server...")
-    app.run(host="0.0.0.0", port=5001, debug=True)
+    # ✅ Use dynamic port for Render
+    port = int(os.environ.get("PORT", 5000))
+    print(f"🚀 Starting ML API server on port {port}...")
+    app.run(host="0.0.0.0", port=port, debug=False)
